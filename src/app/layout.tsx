@@ -1,53 +1,55 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
+import { Providers } from "@/components/providers/Providers"
+import Header from "@/components/layout/Header"
+import Footer from "@/components/layout/Footer"
+import GdprBanner from "@/components/layout/GdprBanner"
+import AnnouncementBar from "@/components/layout/AnnouncementBar"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+  display: "swap",
+  variable: "--font-inter",
+})
 
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
-  icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+  title: {
+    default: "QR Code Generator 2026 – Kostenlos & Sofort | FastQRCodeGen.online",
+    template: "%s | FastQRCodeGen.online"
   },
+  description: "QR-Code kostenlos erstellen 2026: 21 Typen (URL, WhatsApp, WiFi, vCard & mehr). Sofort-Download als PNG, SVG & PDF. Kein Account nötig.",
+  metadataBase: new URL("https://fastqrcodegen.online"),
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    locale: "de_DE",
     type: "website",
+    siteName: "FastQRCodeGen.online",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
   },
-};
+  robots: {
+    index: true,
+    follow: true,
+  }
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
-      >
-        {children}
-        <Toaster />
+    <html lang="de" suppressHydrationWarning className={inter.variable}>
+      <body className={`${inter.className} bg-[var(--background)] text-[var(--foreground)] antialiased`}>
+        <Providers>
+          <AnnouncementBar />
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <GdprBanner />
+        </Providers>
       </body>
     </html>
-  );
+  )
 }

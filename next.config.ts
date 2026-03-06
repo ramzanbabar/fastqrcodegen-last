@@ -1,12 +1,22 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  output: "standalone",
-  /* config options here */
-  typescript: {
-    ignoreBuildErrors: true,
+  reactStrictMode: true,
+  turbopack: {},
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "fastqrcodegen.online" }
+    ]
   },
-  reactStrictMode: false,
-};
+  webpack: (config) => {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      path: false,
+      crypto: false
+    }
+    return config
+  }
+}
 
-export default nextConfig;
+export default nextConfig
